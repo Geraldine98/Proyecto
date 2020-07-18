@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="86ea08748c584712be5c8154d688cf8c" Name="Diagram1">
+        <EntityTypeShape EntityType="TrabajoModel.Donacion" Width="1.5" PointX="5.25" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrabajoModel.Donador" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrabajoModel.personaPobreza" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrabajoModel.Situacion" Width="1.5" PointX="8.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrabajoModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrabajoModel.Territorio" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrabajoModel.Triaje" Width="1.5" PointX="5.25" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TrabajoModel.Usuario" Width="1.5" PointX="3" PointY="13" IsExpanded="true" />
+        <AssociationConnector Association="TrabajoModel.FK_Donacion_Donador" ManuallyRouted="false" />
+        <AssociationConnector Association="TrabajoModel.FK_Donacion_personaPobreza" ManuallyRouted="false" />
+        <AssociationConnector Association="TrabajoModel.FK_Donacion_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="TrabajoModel.FK_personaPobreza_Territorio" ManuallyRouted="false" />
+        <AssociationConnector Association="TrabajoModel.FK_Situacion_Territorio" ManuallyRouted="false" />
+        <AssociationConnector Association="TrabajoModel.FK_Situacion_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="TrabajoModel.FK_Usuario_Territorio" ManuallyRouted="false" />
+        <AssociationConnector Association="TrabajoModel.FK_Triaje_Usuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

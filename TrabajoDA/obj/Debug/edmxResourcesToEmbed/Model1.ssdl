@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrabajoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Donacion">
+    <Key>
+      <PropertyRef Name="idDonacion" />
+    </Key>
+    <Property Name="idDonacion" Type="int" Nullable="false" />
+    <Property Name="idDonador" Type="int" />
+    <Property Name="idUsuario" Type="int" />
+    <Property Name="Estado" Type="int" />
+    <Property Name="fechaEntrega" Type="datetime" />
+    <Property Name="idPersona" Type="int" />
+  </EntityType>
+  <EntityType Name="Donador">
+    <Key>
+      <PropertyRef Name="idDonador" />
+    </Key>
+    <Property Name="idDonador" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="150" />
+    <Property Name="Apellidos" Type="varchar" MaxLength="150" />
+    <Property Name="tipoDonacion" Type="varchar" MaxLength="60" />
+    <Property Name="Caracteristicas" Type="varchar" MaxLength="100" />
+    <Property Name="Cantidad" Type="int" />
+    <Property Name="Fecha" Type="date" />
+    <Property Name="Estado" Type="int" />
+    <Property Name="Dni" Type="varchar" MaxLength="1000" />
+  </EntityType>
+  <EntityType Name="personaPobreza">
+    <Key>
+      <PropertyRef Name="idPersona" />
+    </Key>
+    <Property Name="idPersona" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="Apellidos" Type="varchar" MaxLength="100" />
+    <Property Name="Dni" Type="varchar" MaxLength="50" />
+    <Property Name="Sexo" Type="varchar" MaxLength="50" />
+    <Property Name="FechaN" Type="datetime" />
+    <Property Name="tipoProbreza" Type="varchar" MaxLength="50" />
+    <Property Name="Estado" Type="int" />
+    <Property Name="idTerritorio" Type="int" />
+  </EntityType>
+  <EntityType Name="Situacion">
+    <Key>
+      <PropertyRef Name="idSituacion" />
+    </Key>
+    <Property Name="idSituacion" Type="nchar" MaxLength="10" Nullable="false" />
+    <Property Name="idUsuario" Type="int" />
+    <Property Name="fecha" Type="date" />
+    <Property Name="provincia" Type="varchar" MaxLength="100" />
+    <Property Name="totalPositivos" Type="int" />
+    <Property Name="totalFallecidos" Type="int" />
+    <Property Name="totalRecuperados" Type="int" />
+    <Property Name="leatalidad" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Estado" Type="int" />
+    <Property Name="idTerritorio" Type="int" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Territorio">
+    <Key>
+      <PropertyRef Name="idTerritorio" />
+    </Key>
+    <Property Name="idTerritorio" Type="int" Nullable="false" />
+    <Property Name="Provincia" Type="varchar" MaxLength="100" />
+    <Property Name="Distrito" Type="varchar" MaxLength="100" />
+    <Property Name="Estado" Type="int" />
+  </EntityType>
+  <EntityType Name="Triaje">
+    <Key>
+      <PropertyRef Name="idTriaje" />
+    </Key>
+    <Property Name="idTriaje" Type="int" Nullable="false" />
+    <Property Name="idUsuario" Type="int" />
+    <Property Name="Estado" Type="int" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="idUsuario" />
+    </Key>
+    <Property Name="idUsuario" Type="int" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="100" />
+    <Property Name="ApellidoPaterno" Type="varchar" MaxLength="100" />
+    <Property Name="ApellidoMaterno" Type="varchar" MaxLength="100" />
+    <Property Name="DNI" Type="varchar" MaxLength="100" />
+    <Property Name="Edad" Type="int" />
+    <Property Name="fechaNacimiento" Type="date" />
+    <Property Name="Correo" Type="varchar" MaxLength="100" />
+    <Property Name="Contraseña" Type="varchar" MaxLength="100" />
+    <Property Name="Ocupacion" Type="varchar" MaxLength="100" />
+    <Property Name="Interes" Type="varchar" MaxLength="100" />
+    <Property Name="Sexo" Type="varchar" MaxLength="100" />
+    <Property Name="Estado" Type="int" />
+    <Property Name="idTerritorio" Type="int" />
+  </EntityType>
+  <Association Name="FK_Donacion_Donador">
+    <End Role="Donador" Type="Self.Donador" Multiplicity="0..1" />
+    <End Role="Donacion" Type="Self.Donacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Donador">
+        <PropertyRef Name="idDonador" />
+      </Principal>
+      <Dependent Role="Donacion">
+        <PropertyRef Name="idDonador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Donacion_personaPobreza">
+    <End Role="personaPobreza" Type="Self.personaPobreza" Multiplicity="0..1" />
+    <End Role="Donacion" Type="Self.Donacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="personaPobreza">
+        <PropertyRef Name="idPersona" />
+      </Principal>
+      <Dependent Role="Donacion">
+        <PropertyRef Name="idPersona" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Donacion_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Donacion" Type="Self.Donacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Donacion">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_personaPobreza_Territorio">
+    <End Role="Territorio" Type="Self.Territorio" Multiplicity="0..1" />
+    <End Role="personaPobreza" Type="Self.personaPobreza" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Territorio">
+        <PropertyRef Name="idTerritorio" />
+      </Principal>
+      <Dependent Role="personaPobreza">
+        <PropertyRef Name="idTerritorio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Situacion_Territorio">
+    <End Role="Territorio" Type="Self.Territorio" Multiplicity="0..1" />
+    <End Role="Situacion" Type="Self.Situacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Territorio">
+        <PropertyRef Name="idTerritorio" />
+      </Principal>
+      <Dependent Role="Situacion">
+        <PropertyRef Name="idTerritorio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Situacion_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Situacion" Type="Self.Situacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Situacion">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Triaje_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="0..1" />
+    <End Role="Triaje" Type="Self.Triaje" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="idUsuario" />
+      </Principal>
+      <Dependent Role="Triaje">
+        <PropertyRef Name="idUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Usuario_Territorio">
+    <End Role="Territorio" Type="Self.Territorio" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Territorio">
+        <PropertyRef Name="idTerritorio" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="idTerritorio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TrabajoModelStoreContainer">
+    <EntitySet Name="Donacion" EntityType="Self.Donacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Donador" EntityType="Self.Donador" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="personaPobreza" EntityType="Self.personaPobreza" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Situacion" EntityType="Self.Situacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Territorio" EntityType="Self.Territorio" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Triaje" EntityType="Self.Triaje" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Donacion_Donador" Association="Self.FK_Donacion_Donador">
+      <End Role="Donador" EntitySet="Donador" />
+      <End Role="Donacion" EntitySet="Donacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Donacion_personaPobreza" Association="Self.FK_Donacion_personaPobreza">
+      <End Role="personaPobreza" EntitySet="personaPobreza" />
+      <End Role="Donacion" EntitySet="Donacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Donacion_Usuario" Association="Self.FK_Donacion_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Donacion" EntitySet="Donacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_personaPobreza_Territorio" Association="Self.FK_personaPobreza_Territorio">
+      <End Role="Territorio" EntitySet="Territorio" />
+      <End Role="personaPobreza" EntitySet="personaPobreza" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Situacion_Territorio" Association="Self.FK_Situacion_Territorio">
+      <End Role="Territorio" EntitySet="Territorio" />
+      <End Role="Situacion" EntitySet="Situacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Situacion_Usuario" Association="Self.FK_Situacion_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Situacion" EntitySet="Situacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Triaje_Usuario" Association="Self.FK_Triaje_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Triaje" EntitySet="Triaje" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Usuario_Territorio" Association="Self.FK_Usuario_Territorio">
+      <End Role="Territorio" EntitySet="Territorio" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
